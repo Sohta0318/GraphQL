@@ -21,7 +21,7 @@ const SongList = (props) => {
         <li key={id}>
           {title}
           <i
-            className="material-icons"
+            className="material-icons right"
             onClick={() => {
               onSongDelete(id)
             }}
