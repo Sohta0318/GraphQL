@@ -7,12 +7,13 @@ import query from '../queries/fetchSong.js'
 const SongList = (props) => {
   if (props.data.loading) return <div>Loading...</div>
   const onSongDelete = (id) => {
-    props.mutate({
-      variables: {
-        id,
-      },
-      fetchQueries: { query },
-    })
+    props
+      .mutate({
+        variables: {
+          id,
+        },
+      })
+      .then(props.data.refetch())
   }
   const renderSongs = () => {
     return props.data.songs.map(({ id, title }) => {
