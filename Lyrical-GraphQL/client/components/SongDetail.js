@@ -1,11 +1,19 @@
 import React from 'react'
+import { graphql } from 'react-apollo'
+import fetchSong from '../queries/fetchSong'
 
-const SongDetail = () => {
+const SongDetail = (props) => {
+  const { song } = props.data.song
+  if (!song) return <div>Loading...</div>
   return (
     <div>
-      <h3>Song Detail</h3>
+      <h3>{song.title}</h3>
     </div>
   )
 }
 
-export default SongDetail
+export default graphql(fetchSong, {
+  options: (props) => {
+    return { variables: { id: props.params.id } }
+  },
+})(SongDetail)
