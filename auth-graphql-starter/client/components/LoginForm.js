@@ -1,13 +1,20 @@
 import React from 'react'
 import AuthForm from './AuthForm'
+import { graphql } from 'react-apollo'
+import mutation from '../mutations/Login'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  const onSubmit = ({ email, password }) => {
+    props.mutate({
+      variables: { email, password },
+    })
+  }
   return (
     <div>
       <h3>Login</h3>
-      <AuthForm />
+      <AuthForm onSubmit={onSubmit} />
     </div>
   )
 }
 
-export default LoginForm
+export default graphql(mutation)(LoginForm)
